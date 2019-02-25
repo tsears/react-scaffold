@@ -19,8 +19,8 @@ module.exports = {
   },
   rules: {
     'no-var': 1,
-    'no-debugger': level,
-    'spaced-comment': level,
+    'no-debugger': 2,
+    'spaced-comment': 1,
     'comma-dangle': [ 'error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',
