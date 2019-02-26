@@ -63,12 +63,27 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.m\.css$/,
+        use: ['css-loader'],
+      },
     ],
   },
   plugins: [
     // Writes styles.css to disk.
     new CleanWebpackPlugin(['dist']),
-    new MiniCssExtractPlugin('[name].css'),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name].css',
+    }),
     new ForceCaseSensitivityPlugin(),
     new HtmlWebpackPlugin({
       template: 'app/index.html',

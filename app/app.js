@@ -1,3 +1,5 @@
+import 'css/index.scss'
+
 function alien () {
   let target = document.querySelector('.response')
 
