@@ -1,21 +1,24 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true
+  parser: '@typescript-eslint/parser',
+  env: {
+    'browser': true,
+    'commonjs': true,
+    'es6': true
   },
   plugins: [
+    'disable',
+    '@typescript-eslint',
     'max-len-2',
     'jasmine',
   ],
   extends: [
-    "standard",
-    "standard-react",
-    "plugin:jasmine/recommended"
+    'plugin:@typescript-eslint/recommended',
+    'standard',
+    'standard-react',
+    'plugin:jasmine/recommended',
   ],
   globals: {
   },
-  parser: '@typescript-eslint/parser',
   rules: {
     'no-var': 1,
     'no-debugger': 2,
@@ -45,5 +48,17 @@ module.exports = {
     'jasmine/no-promise-without-done-fail': 0,
     'jasmine/no-spec-dupes': 0,
     'jasmine/no-suite-dupes': 0,
+    'indent': 'off',
+    '@typescript-eslint/indent': ['error', 2]
+  },
+  settings: {
+    'eslint-plugin-disable': {
+      'paths': {
+        '@typescript-eslint': [
+          '**/server/**/*.js',
+          'webpack.config.js',
+        ],
+      },
+    },
   },
 };

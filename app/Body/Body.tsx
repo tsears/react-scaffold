@@ -1,11 +1,10 @@
 import * as React from 'react'
 import * as styles from './Body.m.css'
 
-export interface BodyProps {}
 interface BodyState { lmao: string }
 
-export class Body extends React.Component<BodyProps, BodyState> {
-  constructor (props: BodyProps) {
+export class Body extends React.Component<{}, BodyState> {
+  public constructor (props: {}) {
     super(props)
 
     this.state = {
@@ -13,7 +12,7 @@ export class Body extends React.Component<BodyProps, BodyState> {
     }
   }
 
-  render () {
+  public render (): React.ReactElement {
     const { lmao } = this.state
 
     return (
@@ -24,7 +23,7 @@ export class Body extends React.Component<BodyProps, BodyState> {
     )
   }
 
-  componentDidMount () {
+  public componentDidMount (): void {
     let ayy = new Request('/api/ayy')
 
     fetch(ayy)
