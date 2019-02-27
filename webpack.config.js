@@ -12,7 +12,7 @@ module.exports = {
   context: __dirname,
   entry: {
     main: [
-      './app/app.js',
+      './app/app.jsx',
     ],
   },
   output: {
@@ -24,9 +24,12 @@ module.exports = {
     rules: [
       { parser: { amd: false } },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        include: [/app\/scripts/],
+        include: [/app/],
+        resolve: {
+          extensions: ['.js', '.jsx'],
+        },
         use: [
           {
             loader: 'babel-loader',
@@ -34,7 +37,8 @@ module.exports = {
               sourceMaps: true,
               cacheDirectory: true,
               presets: [
-                'es2015',
+                '@babel/env',
+                '@babel/react',
               ],
               plugins: [
                 'babel-plugin-rewire',

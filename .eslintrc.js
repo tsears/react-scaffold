@@ -10,6 +10,7 @@ module.exports = {
   ],
   extends: [
     "standard",
+    "standard-react",
     "plugin:jasmine/recommended"
   ],
   globals: {
