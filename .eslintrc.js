@@ -15,9 +15,7 @@ module.exports = {
   ],
   globals: {
   },
-  parserOptions: {
-    "sourceType": "module"
-  },
+  parser: '@typescript-eslint/parser',
   rules: {
     'no-var': 1,
     'no-debugger': 2,

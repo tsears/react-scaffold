@@ -30,18 +30,6 @@ module.exports = {
         },
       },
       {
-        test: /\.html/,
-        exclude: /index\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-            },
-          },
-        ],
-      },
-      {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -81,7 +69,7 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[name].css',
     }),
-    new ForceCaseSensitivityPlugin(),
+    new ForceCaseSensitivityPlugin(), // because macOS dev
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       filename: 'index.html',
@@ -93,8 +81,6 @@ module.exports = {
       // This significantly speeds up build times.
       path.join('./node_modules'),
     ],
-  },
-  externals: {
   },
   // Webpack hosts the files here. Also serves as a reverse proxy to
   // localProxy/proxy.js.
