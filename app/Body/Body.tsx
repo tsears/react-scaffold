@@ -1,12 +1,15 @@
-import React from 'react'
-import styles from './Body.m.css'
+import * as React from 'react'
+import * as styles from './Body.m.css'
 
-export default class Body extends React.Component {
-  constructor (props) {
+export interface BodyProps {}
+interface BodyState { lmao: string }
+
+export class Body extends React.Component<BodyProps, BodyState> {
+  constructor (props: BodyProps) {
     super(props)
 
     this.state = {
-      data: null,
+      lmao: null,
     }
   }
 

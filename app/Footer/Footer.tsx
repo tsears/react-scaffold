@@ -1,8 +1,8 @@
-import React from 'react'
-import styles from './Footer.m.css'
+import * as React from 'react'
+import * as styles from './Footer.m.css'
 
 const currentYear = new Date().getFullYear()
 
-export default () => (
+export const Footer = () => (
   <div className={styles.footer}>tchat &copy;{currentYear} Tom Sears</div>
 )

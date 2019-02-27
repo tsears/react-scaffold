@@ -12,7 +12,7 @@ module.exports = {
   context: __dirname,
   entry: {
     main: [
-      './app/app.jsx',
+      './app/app.tsx',
     ],
   },
   output: {
@@ -22,38 +22,12 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
-      { parser: { amd: false } },
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        include: [/app/],
+        test: /\.(ts|tsx)$/,
+        loader: 'awesome-typescript-loader',
         resolve: {
-          extensions: ['.js', '.jsx'],
+          extensions: ['.ts', '.tsx'],
         },
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              sourceMaps: true,
-              cacheDirectory: true,
-              presets: [
-                '@babel/env',
-                '@babel/react',
-              ],
-              plugins: [
-                'babel-plugin-rewire',
-              ],
-            },
-          },
-          {
-            loader: 'eslint-loader',
-            options: {
-              quiet: true,
-              failOnError: true,
-              emitError: true,
-            },
-          },
-        ],
       },
       {
         test: /\.html/,
@@ -80,6 +54,12 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
+          },
+          {
+            loader: 'dts-css-modules-loader',
+            options: {
+              namedExport: true,
+            },
           },
           {
             loader: 'css-loader',
@@ -133,7 +113,7 @@ module.exports = {
         stats: { color: true },
         toProxy: true,
         target: 'http://localhost:8081',
-        pathRewrite: { '^/api': '' },
+        pathRewrite: { '^/api': '' }, // rewrite /api to /
         context: [
           '/api/**',
         ],
