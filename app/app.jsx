@@ -1,4 +1,5 @@
 import 'css/index.scss'
+import styles from './app.m.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -16,7 +17,10 @@ export default class App extends React.Component {
     const { lmao } = this.state
 
     return (
-      <div>Ayy {lmao}</div>
+      <div className={styles.app}>
+        <h1>T-Chat, yo</h1>
+        <div>Ayy {lmao}</div>
+      </div>
     )
   }
 
