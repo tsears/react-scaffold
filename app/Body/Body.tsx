@@ -17,7 +17,7 @@ export class Body extends React.Component<{}, BodyState> {
 
     return (
       <div className={styles.body}>
-        <h1>React Scaffold</h1>
+        <h1 className={styles.heading}>React Scaffold</h1>
         <div>Ayy {lmao}</div>
       </div>
     )
