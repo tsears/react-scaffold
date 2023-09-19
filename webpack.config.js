@@ -18,6 +18,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist/'),
     filename: '[name].min.js',
+    library: '[name]',
+    libraryTarget: 'umd',
   },
   devtool: 'source-map',
   module: {
