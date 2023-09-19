@@ -6,7 +6,8 @@ import { Body } from './Body/Body'
 import { Footer } from './Footer/Footer'
 
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+
+import { createRoot } from 'react-dom/client'
 
 export default class App extends React.Component {
   public render (): React.ReactElement {
@@ -19,5 +20,6 @@ export default class App extends React.Component {
     )
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('app'))
+const container = document.getElementById('app')
+const root = createRoot(container)
+root.render(<App />)

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as styles from './Header.m.css'
 
-export const Header: React.StatelessComponent<{}> = (): React.ReactElement => (
+export const Header: React.FunctionComponent<{}> = (): React.ReactElement => (
   <div className={styles.header}>
     <div>
       React Scaffold

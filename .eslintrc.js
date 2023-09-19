@@ -1,21 +1,19 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   env: {
-    'browser': true,
-    'commonjs': true,
-    'es6': true
+    browser: true,
+    commonjs: true,
+    es6: true,
   },
   plugins: [
     'disable',
     '@typescript-eslint',
-    'max-len-2',
-    'jasmine',
   ],
+  processor: 'disable/disable',
   extends: [
     'plugin:@typescript-eslint/recommended',
     'standard',
     'standard-react',
-    'plugin:jasmine/recommended',
   ],
   globals: {
   },
@@ -23,7 +21,7 @@ module.exports = {
     'no-var': 1,
     'no-debugger': 2,
     'spaced-comment': 1,
-    'comma-dangle': [ 'error', {
+    'comma-dangle': ['error', {
       arrays: 'always-multiline',
       objects: 'always-multiline',
       imports: 'always-multiline',
@@ -32,28 +30,14 @@ module.exports = {
     }],
     indent: ['error', 2],
     'max-len': [1, 80, { ignoreUrls: true, ignoreStrings: true }],
-    'max-len-2/max-len-2': [2, 120, {
-      ignoreUrls: true,
-      ignoreStrings: true,
-      ignoreComments: true,
-      ignoreRegExpLiterals: true,
-      ignoreTemplateLiterals: true,
-    }],
     'one-var': 1,
-    'standard/computed-property-even-spacing': 1,
     'no-useless-escape': 1,
     'no-throw-literal': 1,
-    'jasmine/no-focused-tests': 1,
-    'jasmine/missing-expect': 1,
-    'jasmine/no-promise-without-done-fail': 0,
-    'jasmine/no-spec-dupes': 0,
-    'jasmine/no-suite-dupes': 0,
-    'indent': 'off',
-    '@typescript-eslint/indent': ['error', 2]
+    '@typescript-eslint/indent': ['error', 2],
   },
   settings: {
     'eslint-plugin-disable': {
-      'paths': {
+      paths: {
         '@typescript-eslint': [
           '**/server/**/*.js',
           'webpack.config.js',
@@ -61,4 +45,37 @@ module.exports = {
       },
     },
   },
-};
+  overrides: [
+    // {} is a react-ism that doesn't play nice with typescript but is
+    // generally safe in this limited instance.
+    {
+      files: ['app/**/*.tsx'],
+      rules: {
+        '@typescript-eslint/ban-types': [
+          'error',
+          {
+            extendDefaults: true,
+            types: {
+              '{}': false,
+            },
+          },
+        ],
+      },
+    },
+    // for now, the backend is pure js, no need for typescript linting rules
+      files: ['server/**/*.js'],
+      settings: {
+        'disable/plugins': ['@typescript-eslint'],
+      },
+    },
+    // these type files for css modules are generated for us by a webpack
+    // plugin, which does what it does and doesn't allow us to configure
+    // no-semi.
+    {
+      files: ['app/**/*.m.css.d.ts'],
+      rules: {
+        semi: 0,
+      },
+    },
+  ],
+}

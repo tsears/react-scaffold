@@ -24,7 +24,7 @@ export class Body extends React.Component<{}, BodyState> {
   }
 
   public componentDidMount (): void {
-    let ayy = new Request('/api/ayy')
+    const ayy = new Request('/api/ayy')
 
     fetch(ayy)
       .then((response) => {

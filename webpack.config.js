@@ -1,8 +1,9 @@
 /* eslint-env node */
+/* eslint @typescript-eslint/no-var-requires: 0 */
 'use strict'
 
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ForceCaseSensitivityPlugin = require('force-case-sensitivity-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
@@ -26,7 +27,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'ts-loader',
         resolve: {
           extensions: ['.ts', '.tsx'],
         },
@@ -54,9 +55,11 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[name]_[hash:base64]',
+                namedExport: true,
+              },
               importLoaders: 1,
-              localIdentName: '[name]_[hash:base64]',
               sourceMap: true,
             },
           },
@@ -65,13 +68,12 @@ module.exports = {
     ],
   },
   plugins: [
-    // Writes styles.css to disk.
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[name].css',
     }),
-    new ForceCaseSensitivityPlugin(), // because macOS dev
+    new CaseSensitivePathsPlugin(), // because macOS dev
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       filename: 'index.html',
@@ -88,9 +90,10 @@ module.exports = {
   // localProxy/proxy.js.
   devServer: {
     host: '0.0.0.0',
-    disableHostCheck: true,
     port: 9000,
-    contentBase: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     proxy: [
       {
         path: '/**',
