@@ -23,20 +23,16 @@ export class Body extends React.Component<{}, BodyState> {
     )
   }
 
-  public componentDidMount (): void {
-    const ayy = new Request('/api/ayy')
+  public async componentDidMount (): Promise<void> {
+    const response = await fetch('/api/ayy')
+    if (!response.ok) {
+      throw new Error('HTTP error, status = ' + response.status)
+    }
 
-    fetch(ayy)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('HTTP error, status = ' + response.status)
-        }
-        return response.json()
-      })
-      .then((response) => {
-        this.setState({
-          lmao: response.response,
-        })
-      })
+    const data = await response.json()
+
+    this.setState({
+      lmao: data.response,
+    })
   }
 }
